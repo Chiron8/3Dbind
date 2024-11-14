@@ -7,6 +7,6 @@ Takes 1 second to calibrate the magnetometer and then will output a signal:
 Formatted (x, y, z)
 Temperature of the magnetometer can also be recorded if necessary :D
 
-If using Mu Editor enable the plotter view to see the graph of live data
+If using the Mu Editor enable the `plotter` view to output a graph
 
 
