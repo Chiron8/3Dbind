@@ -26,4 +26,8 @@ I hope you enjoy it!
 ## The device is pretty much plug and play!
 
 ## Pictures
-[![alt text](https://github.com/Chiron8/3Dbind/blob/main/IMG_7437.jpg)
+![alt text](https://github.com/Chiron8/3Dbind/blob/main/IMG_7438.jpg)
+![alt text](https://github.com/Chiron8/3Dbind/blob/main/IMG_7439.jpg)
+![alt text](https://github.com/Chiron8/3Dbind/blob/main/IMG_7440.jpg)
+![alt text](https://github.com/Chiron8/3Dbind/blob/main/IMG_7441.jpg)
+![alt text](https://github.com/Chiron8/3Dbind/blob/main/IMG_7437.jpg)
