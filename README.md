@@ -3,6 +3,8 @@
 Written in CircuitPython
 The code is written for an Adafruit QtPy RP2040 with an MMC56x3 magnetometer
 
+Keybindings in code are for Autodesk Fusion, make sure to change them for your preferred CAD!
+
 3D models are availiable here: https://www.thingiverse.com/thing:6834057
 
 ## Instructions
@@ -20,6 +22,8 @@ Orbiting: Same as panning but hold the `SHIFT` key
 Zooming in/out: To zoom in, press the handle down. To zoom out, hold the handle down
 
 I hope you enjoy it!
+
+## The device is pretty much plug and play!
 
 ## Pictures
 
