@@ -104,8 +104,6 @@ while True:
             kbd.release(Keycode.LEFT_SHIFT)
             time.sleep(1)
     
-
-        
     elif mag_y - Y > threshold and mag_z - Z < -threshold: # Push handle forwards
         time.sleep(0.5)
         mag_x, mag_y, mag_z = sensor.magnetic
@@ -115,17 +113,14 @@ while True:
                 m.move(0, -4, 0)
             m.release(Mouse.MIDDLE_BUTTON)
             kbd.release(Keycode.LEFT_SHIFT)
-            time.sleep(1)
-        
-        
+            time.sleep(1)      
     
-    if mag_x > 1000 or mag_x < -1000:
-        pixel.fill((255, 0, 0)) # sets LED colour to red
+    if mag_x > 1000 or mag_x < -1000: # START OF RECLAIBRATION IF MAGNETIC STRENGTH IS VERY HIGH
+        pixel.fill((255, 0, 0)) # Sets LED colour to red
         time.sleep(3)
-        avrgList = [] #sets list to record averages
+        avrgList = [] # Creates 'list of average readings'
 
-
-        # creates a list of current magnetic strengths
+        # Adds magnetometer readings to 'list of average readings'
         for i in range(1, 4):
             pixel.fill((0, 0, 255))
             mag_x, mag_y, mag_z = sensor.magnetic
@@ -134,11 +129,12 @@ while True:
             avrgList.append(mag_z)
             time.sleep(0.5)
 
-        # makes an average of each axis strength so we can cancel it out later in the program
+        # Takes data from 'list of average readings' and creates an average for each axis
+        # This is how the program reads zero when the magnet/handle is stationary
         X = (avrgList[0] + avrgList[3] + avrgList[6]) / 3
         Y = (avrgList[1] + avrgList[4] + avrgList[7]) / 3
         Z = (avrgList[2] + avrgList[5] + avrgList[8]) / 3
-    time.sleep(0.5)
-    i=0
+        
+    i = 0
         
     print("(1,", mag_x - X, ",", mag_y - Y, ",", mag_z - Z, ")")
