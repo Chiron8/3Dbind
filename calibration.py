@@ -15,9 +15,9 @@ X = 0
 Y = 0
 Z = 0
 
-avrgList = [] # Creates list to record averages
+avrgList = [] # Creates 'list of average readings'
 
-# creates a list of current magnetic strengths
+# Adds magnetometer readings to 'list of average readings'
 for i in range(1, 4):
     pixel.fill((0, 255, 0))
     mag_x, mag_y, mag_z = sensor.magnetic
@@ -26,14 +26,15 @@ for i in range(1, 4):
     avrgList.append(mag_z)
     time.sleep(0.5)
 
-# makes an average of each axis strength so we can cancel it out later in the program
+# Takes data from 'list of average readings' and creates an average for each axis
+# This is how the program reads zero when the magnet/handle is stationary
 X = (avrgList[0] + avrgList[3] + avrgList[6]) / 3
 Y = (avrgList[1] + avrgList[4] + avrgList[7]) / 3
 Z = (avrgList[2] + avrgList[5] + avrgList[8]) / 3
 
-
-
 while True:
-    # current mag strength minus average so when the magnet is away everything should read 0
-    print("(1, " + str(mag_x - X) + ", " + str(mag_y - Y) + ", " + str(mag_z - Z) + ")") # needs to be in this format so plotter works
-    time.sleep(0.01) # very short pause so the graph isn't overloaded (produces an error otherwise)
+    # Computer console displays each axis strength minus it's respective average value
+    # This is so Mu Editor plotter can display output from magnetometer
+    mag_x, mag_y, mag_z = sensor.magnetic
+    print("(1, " + str(mag_x - X) + ", " + str(mag_y - Y) + ", " + str(mag_z - Z) + ")")
+    time.sleep(0.01) # Short pause of 0.01s set between each set of 3 axis readings to avoid Mu Editor data overload
