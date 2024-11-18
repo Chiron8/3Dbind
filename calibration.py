@@ -1,22 +1,21 @@
-# import packages
-import time
-import board
-import adafruit_mmc56x3
-import neopixel
+# Import packages for the MC
+import time # Allows MC to introduce pauses
+import board # Allows the MC to communicate with the computer
+import adafruit_mmc56x3 # Allows MC to communicate with magetometer
+import neopixel # Allows MC to use onboard LED
 
-pixel = neopixel.NeoPixel(board.NEOPIXEL, 1) # initializes built in LED
-pixel.fill((255, 0, 0)) # sets LED colour to red
+pixel = neopixel.NeoPixel(board.NEOPIXEL, 1) # Shortcut code to refer to LED
+pixel.fill((255, 0, 0)) # Sets LED colour to red
 
-i2c = board.STEMMA_I2C()  # For using the built-in STEMMA connector
-sensor = adafruit_mmc56x3.MMC5603(i2c) # tells program what magnetometer is connected
+i2c = board.STEMMA_I2C()  # Shortcut code to refer to how magnetometer is connected to MC
+sensor = adafruit_mmc56x3.MMC5603(i2c) # shortcut code to refer to magnetometer
 
-# initializes axis variables
+# Creates 3 average axis variables
 X = 0
 Y = 0
 Z = 0
 
-avrgList = [] #sets list to record averages
-
+avrgList = [] # Creates list to record averages
 
 # creates a list of current magnetic strengths
 for i in range(1, 4):
