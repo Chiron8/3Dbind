@@ -41,40 +41,40 @@ X = (avrgList[0] + avrgList[3] + avrgList[6]) / 3
 Y = (avrgList[1] + avrgList[4] + avrgList[7]) / 3
 Z = (avrgList[2] + avrgList[5] + avrgList[8]) / 3
 
+pixel.fill((255, 40, 80)) # Sets LED colour to pink
 
 while True:
-    pixel.fill((255, 40, 80)) # sets LED colour to green
-    mag_x, mag_y, mag_z = sensor.magnetic # get magnetometer readings
+    # PROGRAM MAIN SECTION
+    # This controls all features of 3Dbind
+    mag_x, mag_y, mag_z = sensor.magnetic # Takes magnetometer readings
     
-    if mag_y - Y < -threshold * 2 and mag_z - Z < -threshold * 2: # press down
-        time.sleep(1)
+    if mag_y - Y < -threshold * 2 and mag_z - Z < -threshold * 2: # Has user pushed down on handle? (zoom feature)
+        time.sleep(1) 
         mag_x, mag_y, mag_z = sensor.magnetic
-        if mag_y - Y < -threshold * 2 and mag_z - Z < -threshold * 2:
-            m.click(Mouse.MIDDLE_BUTTON)
+        if mag_y - Y < -threshold * 2 and mag_z - Z < -threshold * 2: # Is user still pushing down after one second? (zoom out)
+            m.click(Mouse.MIDDLE_BUTTON) # Keybind 'double click middle button' on mouse to zoom out
             time.sleep(0.1)
             m.click(Mouse.MIDDLE_BUTTON)
-        else:
-            for i in range(7):
+        else: # User wasn't pushing down handle after one second
+            for i in range(7): # Keybind 'scroll down' mouse wheel to zoom in
                 m.move(0, 0, -1)
                 time.sleep(0.05)
 
-    # HOW THE CONTROLS WORK:
-    # if mag_s - S < -threshold...:            CHECKS IF CONTROL CAN BE ACTIVATED
-    #   time.sleep(1)                          WAITS 1 SECOND
-    #   if mag_s - S < -threshold:             CHECKS IF CONTROL CAN STILL BE ACTIVATED THE ACTION STARTS 
-    #                                          (THIS IS TO CHECK THE DEVICE HASN'T BEEN PRESSED BY ACCIDENT)
-    #        m.press(Mouse.MIDDLE_BUTTON)      HOLDS MIDDLE BUTTON
-    #        for i in range(41):               MOVES MOUSE SMOOTHLY
+    # BELOW IS A GENERAL EXPLAINATION ON HOW THE PROGRAM MANAGES KEYBINDS IN RELATION TO THE HANDLE MOVEMENT:
+    # if mag_s - S < -threshold...:            CHECKS IF HANDLE HAS BEEN MOVED
+    #   time.sleep(0.5)                            WAITS 0.5 SECONDS
+    #   if mag_s - S < -threshold:             CHECKS IF HANDLE IS STILL IN THE POSITION IT WAS MOVED TO 
+    #                                          (THIS IS TO CHECK THE DEVICE HASN'T BEEN PRESSED or KNOCKED BY ACCIDENT)
+    #        m.press(Mouse.MIDDLE_BUTTON)      KEYBIND 'HOLD MIDDLE BUTTON' OF MOUSE
+    #        for i in range(41):               KEYMIND MOVES ON-SCREEN CURSOR
     #            m.move(-4, 0, 0)
-    #        m.release(Mouse.MIDDLE_BUTTON)    RELEASES MIDDLE BUTTON THE SHIFT KEY
-    #        kbd.release(Keycode.LEFT_SHIFT)
-    #        time.sleep(1)                     PAUSES FOR 1 SECOND TO NOT ACTIVATE AGAIN
+    #        m.release(Mouse.MIDDLE_BUTTON)    KEYBIND RELEASES 'MIDDLE BUTTON' OF MOUSE
+    #        time.sleep(1)                     PAUSES FOR 1 SECOND TO STOP CONTINOUS KEYBIND ACTION
     
-    elif mag_x - X > threshold/2 and mag_z - Z < -(threshold/2) and mag_y - Y < 0: #shift left
+    elif mag_x - X > threshold/2 and mag_z - Z < -(threshold/2) and mag_y - Y < 0: # Push handle left
         time.sleep(0.5)
         mag_x, mag_y, mag_z = sensor.magnetic
         if mag_x - X > threshold/2 and mag_z - Z < -(threshold/2) and mag_y - Y < 0:
-            #kbd.press(Keycode.LEFT_SHIFT)
             m.press(Mouse.MIDDLE_BUTTON)
             for i in range(41):
                 m.move(-4, 0, 0)
@@ -82,11 +82,10 @@ while True:
             kbd.release(Keycode.LEFT_SHIFT)
             time.sleep(1)
             
-    elif mag_z - Z < -(threshold/2) and mag_y - Y < -(threshold/2) and mag_x - X > -(threshold/2): #shift right
+    elif mag_z - Z < -(threshold/2) and mag_y - Y < -(threshold/2) and mag_x - X > -(threshold/2): # Push handle right
         time.sleep(0.5)
         mag_x, mag_y, mag_z = sensor.magnetic
         if mag_z - Z < -(threshold/2) and mag_y - Y< -(threshold/2) and mag_x - X > -(threshold/2):
-            #kbd.press(Keycode.LEFT_SHIFT)
             m.press(Mouse.MIDDLE_BUTTON)
             for i in range(41):
                 m.move(4, 0, 0)
@@ -94,11 +93,10 @@ while True:
             kbd.release(Keycode.LEFT_SHIFT)#
             time.sleep(1)
         
-    elif mag_y - Y < -(threshold/2) and mag_x - X < -(threshold/2): #shift down
+    elif mag_y - Y < -(threshold/2) and mag_x - X < -(threshold/2): # Pull handle backwards
         time.sleep(0.5)
         mag_x, mag_y, mag_z = sensor.magnetic
         if mag_y - Y < -(threshold/2) and mag_x - X < -(threshold/2):
-            #kbd.press(Keycode.LEFT_SHIFT)
             m.press(Mouse.MIDDLE_BUTTON)
             for i in range(41):
                 m.move(0, 4, 0)
@@ -108,11 +106,10 @@ while True:
     
 
         
-    elif mag_y - Y > threshold and mag_z - Z < -threshold: #shift up
+    elif mag_y - Y > threshold and mag_z - Z < -threshold: # Push handle forwards
         time.sleep(0.5)
         mag_x, mag_y, mag_z = sensor.magnetic
         if mag_y - Y > threshold and mag_z - Z < -threshold:
-            #kbd.press(Keycode.LEFT_SHIFT)
             m.press(Mouse.MIDDLE_BUTTON)
             for i in range(41):
                 m.move(0, -4, 0)
