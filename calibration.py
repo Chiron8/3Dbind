@@ -9,7 +9,7 @@ pixel = neopixel.NeoPixel(board.NEOPIXEL, 1) # Shortcut code to refer to LED
 pixel.fill((255, 0, 0)) # Sets LED colour to red
 
 i2c = board.STEMMA_I2C()  # Shortcut code to refer to how magnetometer is connected to MC
-sensor = adafruit_mmc56x3.MMC5603(i2c) # shortcut code to refer to magnetometer
+sensor = adafruit_mmc56x3.MMC5603(i2c) # Shortcut code to refer to magnetometer
 
 # Creates 3 average axis variables
 X = 0
