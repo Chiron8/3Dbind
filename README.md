@@ -1,5 +1,5 @@
 # 3Dbind
-## 3Dbind is a device that can easily control views in 3D CAD (origninally for Autodesk Fusion)
+## 3Dbind is a device that can easily control views in 3D CAD (originally for Autodesk Fusion)
 Written in CircuitPython
 The code is written for an Adafruit QtPy RP2040 with an MMC56x3 magnetometer
 
